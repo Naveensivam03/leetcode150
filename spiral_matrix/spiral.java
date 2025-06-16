@@ -1,43 +1,56 @@
-class Solution{
-  public List<Integer> spiralMatrix(int[][] board){
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        //return side
+        int top =0;
+        int bottom = matrix.length-1;
+        int left =0;
+        int right = matrix[0].length-1;
+        List<Integer> out =new ArrayList<>();
+        while(left<=right && top<=bottom){
+            //right movement:
+            for(int i =left;i<=right ;i++){
+                out.add(matrix[top][i]);
+            }
+            top++;
 
-    int n  = board.length;
-    int m = board[0].length;
-    int[] s =int [m*n];
-    int row =0;
-    int col =0;
+            //condition to checnck the top and bottom inside the loop itself since it will check once everything runs in the while loop
+            if(top>bottom){
+                break;
+            }
+
+            //bottom movement:
+            for(int i =top;i<=bottom;i++){
+                out.add(matrix[i][right]);
+            }
+            right--;
+            //condition to checnck the top and bottom inside the loop itself since it will check once everything runs in the while loop
+
+            if(left>right){
+                break;
+            }
 
 
-    while(!m=0 || !n=0){
-    //right movement:
-    for (int i =0; i < m;i++){
-        s[i] = board[row][i];
-        n-=1;
-        col = i;
+            //left movement:
+            for (int i =right;i>=left;i--){
+                out.add(matrix[bottom][i]);
+            }
+            bottom--;
+            //condition to checnck the top and bottom inside the loop itself since it will check once everything runs in the while loop
+            if (top>bottom){
+                break;
+            }
+
+            //top movement:
+            for (int i =bottom;i>=top;i--){
+                out.add(matrix[i][left]);
+            }
+            left++;
+            //condition to checnck the top and bottom inside the loop itself since it will check once everything runs in the while loop
+            if (left>right){
+                break;
+            }
+        }
+        return out;
+
     }
-
-    //bottom movement:
-    for (int i =0; i<n;i++){
-      s.add(board[i][col]);
-      m-=1;
-      row = i;
-    }
-
-    //left movement;
-    for (int i =0;i<m;i--){
-      s.add(board[row][i]);
-      n-=1;
-      col  = i;
-    }
-
-    //top movement:
-    for(int i =0; i <n;i--){
-      s.add(board[i][col]);
-      m-=1;
-      row=i;
-    }
-
-  }
-  return s;
-  }
 }

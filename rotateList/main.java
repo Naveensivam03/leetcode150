@@ -39,6 +39,7 @@ class Solution {
     for(int i =0; i<remain ; i++){
       curr = curr.next;
     }
+    
     ListNode start = curr.next;
     curr.next = null;
     return start;
